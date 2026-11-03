@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookmarks{% endblock %}
+
+{% block content %}
+
+<h1>My Bookmarked Profiles</h1>
+
+{% if bookmarks %}
+
+    <div class="bookmarks-list">
+
+        {% for bookmark in bookmarks %}
+
+            <div class="bookmark-card">
+
+                <!-- Profile Avatar -->
+                <img
+                    src="{{ bookmark.avatar_url }}"
+                    alt="{{ bookmark.username }} avatar"
+                    width="80"
+                    height="80"
+                >
+
+                <!-- GitHub Username -->
+                <h2>
+                    <a
+                        href="{{ bookmark.html_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {{ bookmark.username }}
+                    </a>
+                </h2>
+
+                {% if bookmark.name %}
+                    <p>{{ bookmark.name }}</p>
+                {% endif %}
+
+                <!-- Delete Bookmark Form -->
+                <form
+                    method="POST"
+                    action="{% url 'bookmark_delete' bookmark.pk %}"
+                >
+                    {% csrf_token %}
+
+                    <button type="submit">
+                        Remove Bookmark
+                    </button>
+                </form>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <p>You haven't bookmarked any GitHub profiles yet.</p>
+
+    <a href="{% url 'search' %}">
+        Search GitHub Profiles
+    </a>
+
+{% endif %}
+
+{% endblock %}

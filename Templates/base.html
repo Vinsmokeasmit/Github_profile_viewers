@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GitHub Profile Viewer{% endblock %}</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #24292f;
+        }
+
+        nav {
+            background-color: #24292f;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #58a6ff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .message.success {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #842029;
+        }
+
+        .message.info {
+            background-color: #cff4fc;
+            color: #055160;
+        }
+
+        .message.warning {
+            background-color: #fff3cd;
+            color: #664d03;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div>
+            <a href="{% url 'search' %}">GitHub Viewer</a>
+        </div>
+
+        <div>
+            <a href="{% url 'search' %}">Search</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'bookmarks' %}">Bookmarks</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+# ============================================================================
+# Python & Django Core
+# ============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django local development databases
+db.sqlite3
+db.sqlite3-journal
+
+# Django media and static deployment directories
+/media/
+/static/
+/staticfiles/
+
+# Logs
+*.log
+
+# ============================================================================
+# Environments & Secrets
+# ============================================================================
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+pythonenv*/
+
+# Sensitive configuration files (containing passwords, API keys, and SECRET_KEY)
+.env
+.env.local
+.env.*.local
+local_settings.py
+
+# ============================================================================
+# IDEs, Editors & OS Specific
+# ============================================================================
+# VS Code
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# ============================================================================
+# Packaging & Dependency Managers (Optional but recommended)
+# ============================================================================
+.pip-wheel-metadata/
+.eggr-info/
+wheels/
+*.egg-info/
