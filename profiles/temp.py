@@ -282,16 +282,4 @@ def render_and_return_image(
     return image
 
 
-# Generate profile
-img = render_and_return_image(
-    username="ASMIT_SHARMA",
-    name="Asmit Sharma",
-    bio="Computer Science Student | Python Developer",
-    public_repos=8,
-    followers=6969
-)
 
-# Save image
-img.save("github_profile_dark.png")
-
-print("Profile image generated successfully!")
