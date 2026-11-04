@@ -22,4 +22,5 @@ urlpatterns = [
         views.bookmark_delete,
         name="bookmark_delete",
     ),
+    path('visualize/', views.visualize, name='visualize'),
 ]

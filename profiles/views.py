@@ -84,3 +84,30 @@ def bookmark_delete(request, pk):
     messages.success(request, "Bookmark removed.")
 
     return redirect("bookmarks")
+
+from django.http import HttpResponseBadRequest,FileResponse,HttpResponse
+from .temp import render_and_return_image
+import io
+def visualize(request):
+    username=request.GET.get("username","").strip()
+    if not username:
+        return HttpResponseBadRequest("Missing username parameter.")
+
+    try:
+        profile=services.get_user(username)
+        repos=services.get_repos(username)
+        img= render_and_return_image(username=profile['username'],
+                         name=profile['name'],
+                         bio=profile['name'],
+                         public_repos=profile['public_repos'],
+                         followers=profile['followers'],
+                         )
+    except services.GitHubError as exc:
+        return HttpResponseBadRequest(str(exc))
+    buffer=io.BytesIO()
+    img.save(buffer,format="PNG")
+    buffer.seek(0)
+    return FileResponse(buffer,content_type="image/png")
+
+
+        
