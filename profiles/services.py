@@ -2,7 +2,7 @@ import re
 import requests
 
 API_BASE = "https://api.github.com"
-TIMEOUT = 5  # seconds. Never call an API without a timeout.
+TIMEOUT = 10  # seconds. Never call an API without a timeout.
 
 HEADERS = {
     "Accept": "application/vnd.github+json",

@@ -2,12 +2,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 from . import services
 from .models import BookmarkedProfile
 
 
-def search(request):
+def jsearch(request):
     query = request.GET.get("q", "").strip()
 
     context = {
@@ -110,4 +111,24 @@ def visualize(request):
     return FileResponse(buffer,content_type="image/png")
 
 
-        
+def search(request):
+    query = request.GET.get("q", "").strip()
+
+    context = {
+        "query": query,
+        "profile": None,
+        "repos": [],
+    }
+
+    if query:
+        try:
+            context["profile"] = services.get_user(query)
+
+            context["repos"] = services.get_repos(
+                context["profile"]["username"]
+            )
+
+        except services.GitHubError as exc:
+            messages.error(request, str(exc))
+
+    return JsonResponse(context)
