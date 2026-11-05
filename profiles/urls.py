@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.jsearch, name="search"),
+    path("", views.jsearch, name="jsearch"),
 
     path(
         "bookmark/<str:username>/",
