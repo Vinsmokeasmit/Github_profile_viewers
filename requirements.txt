@@ -2,6 +2,7 @@ asgiref==3.13.0
 certifi==2026.10.23
 charset-normalizer==3.5.2
 Django==6.1.2
+django-cors-headers==4.9.0
 idna==3.20
 pillow==13.0.0
 pycryptodome==4.3.0
